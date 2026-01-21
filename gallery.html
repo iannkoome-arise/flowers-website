@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rose Gallery | Meru Rose Garden</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --rose-red: #b3003b;
+            --soft-pink: #fff0f3;
+            --deep-dark: #2d2d2d;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fdfdfd;
+            color: var(--deep-dark);
+        }
+
+        /* Navigation Style */
+        header {
+            background: var(--rose-red);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 85%;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span { color: #ffccda; }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+        }
+
+        nav ul li { padding: 0 15px; }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover, nav ul li a.active {
+            color: #ffccda;
+        }
+
+        /* Floating Gallery Containers */
+        .gallery-header {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .gallery-header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--rose-red);
+            font-size: 2.5rem;
+        }
+
+        .rose-card {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #fff;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* The "Floating" Effect */
+        .rose-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(179, 0, 59, 0.15);
+        }
+
+        .gallery-img {
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .rose-card:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        .category-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(179, 0, 59, 0.85);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            z-index: 2;
+        }
+
+        .card-body {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-weight: 600;
+            color: var(--rose-red);
+            margin-bottom: 5px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--deep-dark);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        /* Modal Customization */
+        .modal-content {
+            border-radius: 20px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Meru<span>Roses</span></a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About & Location</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="gallery-header">
+            <h1>Our Rose Collection</h1>
+            <p>Freshly cut blooms from Meru, ready for your special moments.</p>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            
+            <div class="col">
+                <div class="card rose-card shadow-sm" data-bs-toggle="modal" data-bs-target="#roseModal" onclick="updateModal('Crimson Desire', 'Fresh deep red roses.')">
+                    <span class="category-tag">Bestseller</span>
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Crimson Desire</h5>
+                        <p class="price">KES 150 / Stem</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card rose-card shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1559563362-c667ba5f5480?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Yellow Sunshine</h5>
+                        <p class="price">KES 120 / Stem</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card rose-card shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Pink Grace</h5>
+                        <p class="price">KES 130 / Stem</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card rose-card shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1533228633333-e7f80d708fc7?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Pure White</h5>
+                        <p class="price">KES 140 / Stem</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card rose-card shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1496062031456-07b8f162a322?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Sunset Orange</h5>
+                        <p class="price">KES 120 / Stem</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card rose-card shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1562690868-60bbe7293e94?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Ruby Red</h5>
+                        <p class="price">KES 150 / Stem</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card rose-card shadow-sm">
+                    <span class="category-tag">Rare</span>
+                    <img src="https://images.unsplash.com/photo-1494515842191-88390885e34b?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Lavender Mist</h5>
+                        <p class="price">KES 180 / Stem</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card rose-card shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1464851707681-f9d5fdaccea8?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Blush Cream</h5>
+                        <p class="price">KES 130 / Stem</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card rose-card shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Deep Velvet</h5>
+                        <p class="price">KES 160 / Stem</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card rose-card shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1548610762-7c6afe24c261?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Morning Dew</h5>
+                        <p class="price">KES 140 / Stem</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card rose-card shadow-sm">
+                    <img src="https://images.unsplash.com/photo-1516641396056-0ce60a85d49f?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Peach Pastel</h5>
+                        <p class="price">KES 130 / Stem</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card rose-card shadow-sm">
+                    <span class="category-tag">New</span>
+                    <img src="https://images.unsplash.com/photo-1591880911020-d3449744b100?w=500" class="card-img-top gallery-img" alt="Rose">
+                    <div class="card-body">
+                        <h5 class="card-title">Coral Delight</h5>
+                        <p class="price">KES 145 / Stem</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="roseModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Rose Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p id="modalDescription"></p>
+                    <p class="text-muted small">Available at our shop opposite MIBS College, Meru.</p>
+                    <button class="btn btn-danger w-100" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 Meru Rose Garden | Located Opposite MIBS College</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        function updateModal(name, desc) {
+            document.getElementById('modalTitle').innerText = name;
+            document.getElementById('modalDescription').innerText = desc;
+        }
+    </script>
+</body>
+</html>
